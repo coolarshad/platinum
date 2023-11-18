@@ -1,0 +1,440 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailimages_tags %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% comment %} <link rel="stylesheet" href="{% static 'assets/css/welcome_page.css' %}"> {% endcomment %}
+{% endblock extra_css %}
+
+{% block content %}
+{% comment %} {% include 'home/welcome_page.html' %} {% endcomment %}
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PLATINUM RENAISSANCE SDN BHD - HOME</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+ 
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo">
+        <a href="/">
+            <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
+        </a>
+      </h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About Us</a></li>
+          <li><a class="nav-link scrollto" href="#missionvision">Mission & Vision</a></li>
+          <li><a class="nav-link scrollto " href="#portfolio">IMAGES</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+         
+          <li class="dropdown"><a href="#"><span>PRODUCTS & SPECIFICATION</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% for productspec in productspecification %}
+                {%if productspec.is_file%}
+                  {% for block in productspec.file_upload %}
+                    <li><a href="{{block.value.url}}">{{productspec.title}}</a></li>
+                  {% endfor %}
+                {% else %}
+                  <li class="dropdown"><a href="#"><span>{{productspec.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                      {% for first_menu in productspec.specificationfirstmenu_set.all %}
+                        {%if first_menu.is_file%}
+                          {% for block in first_menu.file_upload %}
+                            <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
+                          {% endfor %}
+                        {% else %}
+                          <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                              {% for second_menu in first_menu.specificationsecondmenu_set.all %}
+                                {%if second_menu.is_file%}
+                                {% for block in second_menu.file_upload %}
+                                  <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
+                                {% endfor %}
+                                {% else %}
+                                  <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                                {%endif%}
+                              {%endfor%}
+                            </ul>
+                          </li>
+                        {%endif%}
+                      {%endfor%}
+                    </ul>
+                  </li>
+                {%endif%}
+              {% endfor %}
+            
+            </ul>
+          
+          </li>
+          <li class="dropdown"><a href="#"><span>PRODUCT MATERIAL SAFETY DATASHEET</span> <i class="bi bi-chevron-down"></i></a>
+            
+           <ul>
+            {% for datasheet in productdatasheet %}
+              {%if datasheet.is_file%}
+                  {% for block in datasheet.file_upload %}
+                    <li><a href="{{block.value.url}}">{{datasheet.title}}</a></li>
+                  {% endfor %}
+              {% else %}
+                <li class="dropdown"><a href="#"><span>{{datasheet.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                  <ul>
+                    {% for first_menu in datasheet.datasheetfirstmenu_set.all %}
+                      {%if first_menu.is_file%}
+                        {% for block in first_menu.file_upload %}
+                          <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
+                        {% endfor %}
+                      {% else %}
+                        <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                          <ul>
+                            {% for second_menu in first_menu.datasheetsecondmenu_set.all %}
+                              {%if second_menu.is_file%}
+                              {% for block in second_menu.file_upload %}
+                                <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
+                              {% endfor %}
+                              {% else %}
+                                <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                              {%endif%}
+                            {%endfor%}
+                          </ul>
+                        </li>
+                      {%endif%}
+                    {%endfor%}
+                  </ul>
+              {%endif%}
+            {% endfor %}
+            </ul> 
+          </li>
+         
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+
+
+
+
+        
+
+          {% image first_image.image original format-png as image_png %}
+          <div class="carousel-item active" style="background-image: url({{image_png.url}});">
+            <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2 class="animate__animated animate__fadeInDown">{{ first_image.caption }}</h2>
+                </div>
+            </div>
+        </div>
+      {%for i in image_list %}
+    
+
+      {% image i.image original format-png as i_png %}
+    <div class="carousel-item" style="background-image: url({{i_png.url}});">
+      <div class="carousel-container">
+        <div class="carousel-content">
+          <h2 class="animate__animated animate__fadeInDown">{{i.caption}}</h2>
+        </div>
+      </div>
+    </div>
+
+
+
+    {% endfor %}
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+     <!-- ======= About Section ======= -->
+     <section id="about" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>ABOUT US</h2>
+          <p>{{about.body|safe}}</p>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+
+
+   <!-- ======= Mission and Vision Section ======= -->
+   <section id="missionvision" class="contact">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>MISSION AND VISION</h2>
+        <p class="missionvision">{{visionmission.vision|safe}}</p>
+     
+          <p class="missionvision">{{visionmission.mission|safe}}</p>
+        </div>
+    </div>
+  </section><!-- End About Section -->
+
+  
+   <!-- ======= Portfolio Section ======= -->
+   <section id="portfolio" class="portfolio">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>IMAGES</h2>
+        {% comment %} <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> {% endcomment %}
+      </div>
+
+      <div class="row">
+       
+      </div>
+
+      <div class="row portfolio-container">
+        {% for image in gallery %}
+        {% for block in image.images %}
+        {% if block.block_type == 'image' %}
+            {% image block.value original format-jpeg as image_jpg %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                    {% comment %} <img src="{% image block.value width-300 height-300 %}" class="img-fluid" alt=""> {% endcomment %}
+                    {% image block.value original class="img-fluid image_fixed_size" alt=""%}
+                    <div class="portfolio-info">
+                      {% comment %} <h4>App 1</h4> {% endcomment %}
+                      <p>{{block.value.title}}</p>
+                      <div class="portfolio-links">
+                        <a href="{{image_jpg.url}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{block.value.title}}"><i class="bx bx-plus"></i></a>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+      </div>
+
+    </div>
+  </section><!-- End Portfolio Section -->
+
+
+   
+
+   
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+      
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>{{teampage.description|safe}}</p>
+        </div>
+
+        <div class="row">
+          {% for team_member in teampage.team_members %}
+          {% image team_member.value.image original format-jpeg as image_jpg %}
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="member">
+              <img src="{{image_jpg.url}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>{{ team_member.value.name }}</h4>
+                  <span>{{ team_member.value.designation }}</span>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+
+         
+        
+          {% endfor %}
+        </div>
+      
+      </div>
+    </section><!-- End Team Section -->
+
+   
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+        
+        </div>
+
+        <div class="row contact-info">
+
+          <div class="col-md-4">
+            <div class="contact-address">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <address>{{self.address}}</address>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-phone">
+              <i class="bi bi-phone"></i>
+              <h3>Phone Number</h3>
+              <p><a href="tel:+{{self.phone}}">{{self.phone}}</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-email">
+              <i class="bi bi-envelope"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:{{self.email}}">{{self.email}}</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form">
+          <form action="/contact.php" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-sm-9 col-sm-9">
+            <div class="footer-info">
+              <h1 class="logo">
+                <a href="/">
+                    <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
+                </a>
+              </h1>
+              <p>
+                <strong>PLATINUM RENAISSANCE SDN BHD, MALAYSIA</strong>
+                <br>
+                {{self.address}}<br>
+                <br>
+                <strong>Phone:</strong> {{self.phone}}<br>
+                <strong>Email:</strong> {{self.email}}<br>
+              </p>  
+            </div>
+          </div>
+
+
+          
+          <div class="col-lg-2 col-md-6 footer-links">
+            <div class="col-lg-12">
+                <div class="contact-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3983.911624691602!2d101.67257637594298!3d3.1180778968574323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1698868755819!5m2!1sen!2snp" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    {% comment %} <iframe id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d498.6004265859398!2d103.85051751176076!3d1.2923600990574362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a1350d10f1%3A0xe471fd72f9ffcba1!2sPeninsula%20Plaza%20Singapore!5e0!3m2!1sen!2snp!4v1604809094693!5m2!1sen!2snp" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>PLATINUM RENAISSANCE SDN BHD, MALAYSIA </span></strong>. All Rights Reserved
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+{% endblock content %}

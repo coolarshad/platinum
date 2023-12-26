@@ -59,7 +59,7 @@ Delete the line below if you're just getting started and want to remove the welc
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li><a class="nav-link scrollto" href="#missionvision">Mission & Vision</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">IMAGES</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          {% comment %} <li><a class="nav-link scrollto" href="#team">Team</a></li> {% endcomment %}
          
           <li class="dropdown"><a href="#"><span>PRODUCTS & SPECIFICATION</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -100,7 +100,7 @@ Delete the line below if you're just getting started and want to remove the welc
             </ul>
           
           </li>
-          <li class="dropdown"><a href="#"><span>PRODUCT MATERIAL SAFETY DATASHEET</span> <i class="bi bi-chevron-down"></i></a>
+          {% comment %} <li class="dropdown"><a href="#"><span>PRODUCT MATERIAL SAFETY DATASHEET</span> <i class="bi bi-chevron-down"></i></a>
             
            <ul>
             {% for datasheet in productdatasheet %}
@@ -136,7 +136,7 @@ Delete the line below if you're just getting started and want to remove the welc
               {%endif%}
             {% endfor %}
             </ul> 
-          </li>
+          </li> {% endcomment %}
          
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
@@ -272,7 +272,7 @@ Delete the line below if you're just getting started and want to remove the welc
    
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
+    {% comment %} <section id="team" class="team">
       <div class="container">
       
         <div class="section-title">
@@ -303,7 +303,8 @@ Delete the line below if you're just getting started and want to remove the welc
         </div>
       
       </div>
-    </section><!-- End Team Section -->
+    </section> {% endcomment %}
+    <!-- End Team Section -->
 
    
 
@@ -345,7 +346,8 @@ Delete the line below if you're just getting started and want to remove the welc
         </div>
 
         <div class="form">
-          <form action="/contact.php" method="post" role="form" class="php-email-form">
+          <form action="{% url 'submit_contact_form' %}" method="post" role="form" class="php-email-form">
+            {% csrf_token %}
             <div class="row">
               <div class="col-md-6 form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">

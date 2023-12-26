@@ -56,6 +56,7 @@ Delete the line below if you're just getting started and want to remove the welc
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li><a class="nav-link scrollto" href="#missionvision">Mission & Vision</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">IMAGES</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
@@ -136,7 +137,7 @@ Delete the line below if you're just getting started and want to remove the welc
             {% endfor %}
             </ul> 
           </li>
-          <li><a class="nav-link scrollto" href="#about">About Us</a></li>
+         
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -198,6 +199,18 @@ Delete the line below if you're just getting started and want to remove the welc
   </section><!-- End Hero -->
 
   <main id="main">
+
+     <!-- ======= About Section ======= -->
+     <section id="about" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>ABOUT US</h2>
+          <p>{{about.body|safe}}</p>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+
 
    <!-- ======= Mission and Vision Section ======= -->
    <section id="missionvision" class="contact">
@@ -292,17 +305,7 @@ Delete the line below if you're just getting started and want to remove the welc
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>ABOUT US</h2>
-          <p>{{about.body|safe}}</p>
-        </div>
-      </div>
-    </section><!-- End About Section -->
-
+   
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">

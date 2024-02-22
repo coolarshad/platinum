@@ -3,6 +3,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from django.contrib import messages
 
 def submit_contact_form(request):
     if request.method == 'POST':
@@ -25,8 +26,10 @@ def submit_contact_form(request):
                 [recipient_email],
                 fail_silently=False,
             )
+            messages.success(request, "Email sent successfully!")
             return HttpResponse("Email sent successfully!")
         except Exception as e:
+            messages.error(request, f"Error: {e}")
             return HttpResponse(f"Error: {e}")
     else:
         # Handle other HTTP methods if needed

@@ -646,8 +646,9 @@ section {
   margin-bottom: 20px !important; 
 }
 .image_fixed_size {
-  width: 150; /* Set your desired width */
-  height: 150px; /* Set your desired height */
+  width: 100%; /* Make the image fill the width of its container */
+    height: 100%; /* Adjust this as needed to maintain the aspect ratio or fill a specific height */
+    object-fit: contain;
 }
 /*--------------------------------------------------------------
 # About

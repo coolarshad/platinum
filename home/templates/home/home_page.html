@@ -258,9 +258,7 @@ Delete the line below if you're just getting started and want to remove the welc
           {% image block.value original format-jpeg as image_jpg %}
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              {% comment %} <img src="{% image block.value width-300 height-300 %}" class="img-fluid" alt=""> {%
-              endcomment %}
-              {% image block.value original class="img-fluid image_fixed_size" alt=""%}
+              <img src="{{ image_jpg.url }}" class="img-fluid image_fixed_size" alt="{{ block.value.title }}">
               <div class="portfolio-info">
                 {% comment %} <h4>App 1</h4> {% endcomment %}
                 <p>{{block.value.title}}</p>

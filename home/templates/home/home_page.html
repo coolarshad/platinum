@@ -8,7 +8,8 @@
 {% comment %}
 Delete the line below if you're just getting started and want to remove the welcome screen!
 {% endcomment %}
-{% comment %} <link rel="stylesheet" href="{% static 'assets/css/welcome_page.css' %}"> {% endcomment %}
+{% comment %}
+<link rel="stylesheet" href="{% static 'assets/css/welcome_page.css' %}"> {% endcomment %}
 {% endblock extra_css %}
 
 {% block content %}
@@ -27,7 +28,9 @@ Delete the line below if you're just getting started and want to remove the welc
   <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
@@ -40,7 +43,7 @@ Delete the line below if you're just getting started and want to remove the welc
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
- 
+
 </head>
 
 <body>
@@ -50,7 +53,7 @@ Delete the line below if you're just getting started and want to remove the welc
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo">
         <a href="/">
-            <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
+          <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
         </a>
       </h1>
       <nav id="navbar" class="navbar">
@@ -60,85 +63,91 @@ Delete the line below if you're just getting started and want to remove the welc
           <li class="dropdown"><a href="#"><span>PRODUCTS & SPECIFICATION</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               {% for productspec in productspecification %}
-                {%if productspec.is_file%}
-                  {% for block in productspec.file_upload %}
-                    <li><a href="{{block.value.url}}">{{productspec.title}}</a></li>
+              {%if productspec.is_file%}
+              {% for block in productspec.file_upload %}
+              <li><a href="{{block.value.url}}">{{productspec.title}}</a></li>
+              {% endfor %}
+              {% else %}
+              <li class="dropdown"><a href="#"><span>{{productspec.title}}</span> <i
+                    class="bi bi-chevron-right"></i></a>
+                <ul>
+                  {% for first_menu in productspec.specificationfirstmenu_set.all %}
+                  {%if first_menu.is_file%}
+                  {% for block in first_menu.file_upload %}
+                  <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
                   {% endfor %}
-                {% else %}
-                  <li class="dropdown"><a href="#"><span>{{productspec.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                  {% else %}
+                  <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i
+                        class="bi bi-chevron-right"></i></a>
                     <ul>
-                      {% for first_menu in productspec.specificationfirstmenu_set.all %}
-                        {%if first_menu.is_file%}
-                          {% for block in first_menu.file_upload %}
-                            <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
-                          {% endfor %}
-                        {% else %}
-                          <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                              {% for second_menu in first_menu.specificationsecondmenu_set.all %}
-                                {%if second_menu.is_file%}
-                                {% for block in second_menu.file_upload %}
-                                  <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
-                                {% endfor %}
-                                {% else %}
-                                  <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
-                                {%endif%}
-                              {%endfor%}
-                            </ul>
-                          </li>
+                      {% for second_menu in first_menu.specificationsecondmenu_set.all %}
+                      {%if second_menu.is_file%}
+                      {% for block in second_menu.file_upload %}
+                      <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
+                      {% endfor %}
+                      {% else %}
+                      <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i
+                            class="bi bi-chevron-right"></i></a>
                         {%endif%}
-                      {%endfor%}
+                        {%endfor%}
                     </ul>
                   </li>
-                {%endif%}
+                  {%endif%}
+                  {%endfor%}
+                </ul>
+              </li>
+              {%endif%}
               {% endfor %}
-            
+
             </ul>
-          
+
           </li>
           <li><a class="nav-link scrollto" href="#missionvision">Mission & Vision</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">IMAGES</a></li>
           {% comment %} <li><a class="nav-link scrollto" href="#team">Team</a></li> {% endcomment %}
-         
-        
-          {% comment %} <li class="dropdown"><a href="#"><span>PRODUCT MATERIAL SAFETY DATASHEET</span> <i class="bi bi-chevron-down"></i></a>
-            
-           <ul>
-            {% for datasheet in productdatasheet %}
+
+
+          {% comment %} <li class="dropdown"><a href="#"><span>PRODUCT MATERIAL SAFETY DATASHEET</span> <i
+                class="bi bi-chevron-down"></i></a>
+
+            <ul>
+              {% for datasheet in productdatasheet %}
               {%if datasheet.is_file%}
-                  {% for block in datasheet.file_upload %}
-                    <li><a href="{{block.value.url}}">{{datasheet.title}}</a></li>
-                  {% endfor %}
+              {% for block in datasheet.file_upload %}
+              <li><a href="{{block.value.url}}">{{datasheet.title}}</a></li>
+              {% endfor %}
               {% else %}
-                <li class="dropdown"><a href="#"><span>{{datasheet.title}}</span> <i class="bi bi-chevron-right"></i></a>
-                  <ul>
-                    {% for first_menu in datasheet.datasheetfirstmenu_set.all %}
-                      {%if first_menu.is_file%}
-                        {% for block in first_menu.file_upload %}
-                          <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
-                        {% endfor %}
+              <li class="dropdown"><a href="#"><span>{{datasheet.title}}</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  {% for first_menu in datasheet.datasheetfirstmenu_set.all %}
+                  {%if first_menu.is_file%}
+                  {% for block in first_menu.file_upload %}
+                  <li><a href="{{block.value.url}}">{{first_menu.title}}</a></li>
+                  {% endfor %}
+                  {% else %}
+                  <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i
+                        class="bi bi-chevron-right"></i></a>
+                    <ul>
+                      {% for second_menu in first_menu.datasheetsecondmenu_set.all %}
+                      {%if second_menu.is_file%}
+                      {% for block in second_menu.file_upload %}
+                      <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
+                      {% endfor %}
                       {% else %}
-                        <li class="dropdown"><a href="#"><span>{{first_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
-                          <ul>
-                            {% for second_menu in first_menu.datasheetsecondmenu_set.all %}
-                              {%if second_menu.is_file%}
-                              {% for block in second_menu.file_upload %}
-                                <li><a href="{{block.value.url}}">{{second_menu.title}}</a></li>
-                              {% endfor %}
-                              {% else %}
-                                <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i class="bi bi-chevron-right"></i></a>
-                              {%endif%}
-                            {%endfor%}
-                          </ul>
-                        </li>
-                      {%endif%}
-                    {%endfor%}
-                  </ul>
-              {%endif%}
-            {% endfor %}
-            </ul> 
+                      <li class="dropdown"><a href="#"><span>{{second_menu.title}}</span> <i
+                            class="bi bi-chevron-right"></i></a>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+                  </li>
+                  {%endif%}
+                  {%endfor%}
+                </ul>
+                {%endif%}
+                {% endfor %}
+            </ul>
           </li> {% endcomment %}
-         
+
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -159,31 +168,31 @@ Delete the line below if you're just getting started and want to remove the welc
 
 
 
-        
+
 
           {% image first_image.image original format-png as image_png %}
           <div class="carousel-item active" style="background-image: url({{image_png.url}});">
             <div class="carousel-container">
-                <div class="carousel-content">
-                  <h2 class="animate__animated animate__fadeInDown">{{ first_image.caption }}</h2>
-                </div>
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">{{ first_image.caption }}</h2>
+              </div>
             </div>
-        </div>
-      {%for i in image_list %}
-    
-
-      {% image i.image original format-png as i_png %}
-    <div class="carousel-item" style="background-image: url({{i_png.url}});">
-      <div class="carousel-container">
-        <div class="carousel-content">
-          <h2 class="animate__animated animate__fadeInDown">{{i.caption}}</h2>
-        </div>
-      </div>
-    </div>
+          </div>
+          {%for i in image_list %}
 
 
+          {% image i.image original format-png as i_png %}
+          <div class="carousel-item" style="background-image: url({{i_png.url}});">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">{{i.caption}}</h2>
+              </div>
+            </div>
+          </div>
 
-    {% endfor %}
+
+
+          {% endfor %}
 
         </div>
 
@@ -201,8 +210,8 @@ Delete the line below if you're just getting started and want to remove the welc
 
   <main id="main">
 
-     <!-- ======= About Section ======= -->
-     <section id="about" class="contact">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="contact">
       <div class="container">
 
         <div class="section-title">
@@ -213,69 +222,73 @@ Delete the line below if you're just getting started and want to remove the welc
     </section><!-- End About Section -->
 
 
-   <!-- ======= Mission and Vision Section ======= -->
-   <section id="missionvision" class="contact">
-    <div class="container">
+    <!-- ======= Mission and Vision Section ======= -->
+    <section id="missionvision" class="contact">
+      <div class="container">
 
-      <div class="section-title">
-        <h2>MISSION AND VISION</h2>
-        <p class="missionvision">{{visionmission.vision|safe}}</p>
-     
+        <div class="section-title">
+          <h2>MISSION AND VISION</h2>
+          <p class="missionvision">{{visionmission.vision|safe}}</p>
+
           <p class="missionvision">{{visionmission.mission|safe}}</p>
         </div>
-    </div>
-  </section><!-- End About Section -->
-
-  
-   <!-- ======= Portfolio Section ======= -->
-   <section id="portfolio" class="portfolio">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>IMAGES</h2>
-        {% comment %} <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> {% endcomment %}
       </div>
+    </section><!-- End About Section -->
 
-      <div class="row">
-       
-      </div>
 
-      <div class="row portfolio-container">
-        {% for image in gallery %}
-        {% for block in image.images %}
-        {% if block.block_type == 'image' %}
-            {% image block.value original format-jpeg as image_jpg %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <div class="portfolio-wrap">
-                    {% comment %} <img src="{% image block.value width-300 height-300 %}" class="img-fluid" alt=""> {% endcomment %}
-                    {% image block.value original class="img-fluid image_fixed_size" alt=""%}
-                    <div class="portfolio-info">
-                      {% comment %} <h4>App 1</h4> {% endcomment %}
-                      <p>{{block.value.title}}</p>
-                      <div class="portfolio-links">
-                        <a href="{{image_jpg.url}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{block.value.title}}"><i class="bx bx-plus"></i></a>
-                      
-                      </div>
-                    </div>
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>IMAGES</h2>
+          {% comment %} <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
+            Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+            fugiat sit in iste officiis commodi quidem hic quas.</p> {% endcomment %}
+        </div>
+
+        <div class="row">
+
+        </div>
+
+        <div class="row portfolio-container">
+          {% for image in gallery %}
+          {% for block in image.images %}
+          {% if block.block_type == 'image' %}
+          {% image block.value original format-jpeg as image_jpg %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              {% comment %} <img src="{% image block.value width-300 height-300 %}" class="img-fluid" alt=""> {%
+              endcomment %}
+              {% image block.value original class="img-fluid image_fixed_size" alt=""%}
+              <div class="portfolio-info">
+                {% comment %} <h4>App 1</h4> {% endcomment %}
+                <p>{{block.value.title}}</p>
+                <div class="portfolio-links">
+                  <a href="{{image_jpg.url}}" data-gallery="portfolioGallery" class="portfolio-lightbox"
+                    title="{{block.value.title}}"><i class="bx bx-plus"></i></a>
+
                 </div>
+              </div>
             </div>
-        {% endif %}
-    {% endfor %}
-    {% endfor %}
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+
       </div>
-
-    </div>
-  </section><!-- End Portfolio Section -->
+    </section><!-- End Portfolio Section -->
 
 
-   
 
-   
+
+
 
     <!-- ======= Team Section ======= -->
     {% comment %} <section id="team" class="team">
       <div class="container">
-      
+
         <div class="section-title">
           <h2>Team</h2>
           <p>{{teampage.description|safe}}</p>
@@ -292,22 +305,22 @@ Delete the line below if you're just getting started and want to remove the welc
                 <div class="member-info-content">
                   <h4>{{ team_member.value.name }}</h4>
                   <span>{{ team_member.value.designation }}</span>
-                 
+
                 </div>
               </div>
             </div>
           </div>
 
-         
-        
+
+
           {% endfor %}
         </div>
-      
+
       </div>
     </section> {% endcomment %}
     <!-- End Team Section -->
 
-   
+
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -315,7 +328,7 @@ Delete the line below if you're just getting started and want to remove the welc
 
         <div class="section-title">
           <h2>Contact</h2>
-        
+
         </div>
 
         <div class="row contact-info">
@@ -330,7 +343,8 @@ Delete the line below if you're just getting started and want to remove the welc
 
           <div class="col-md-4">
             <div class="contact-phone">
-              <i class="bi bi-phone"></i>
+              <!-- <i class="bi bi-phone"></i> -->
+              <img src="{% static 'assets/img/WhatsApp_icon.png' %}" width="15%" height="15%" class="img-fluid contact-icon" alt="">
               <h3>Phone Number</h3>
               <p><a href="tel:+{{self.phone}}">{{self.phone}}</a></p>
             </div>
@@ -351,10 +365,12 @@ Delete the line below if you're just getting started and want to remove the welc
             {% csrf_token %}
             <div class="row">
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                  data-rule="minlen:4" data-msg="Please enter at least 4 chars">
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                  data-rule="email" data-msg="Please enter a valid email">
               </div>
             </div>
             <div class="form-group mt-3">
@@ -387,7 +403,7 @@ Delete the line below if you're just getting started and want to remove the welc
             <div class="footer-info">
               <h1 class="logo">
                 <a href="/">
-                    <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
+                  <img src="{% static 'assets/img/platinum_logo.JPG'%}" alt="Platinum Logo">
                 </a>
               </h1>
               <p>
@@ -397,20 +413,25 @@ Delete the line below if you're just getting started and want to remove the welc
                 <br>
                 <strong>Phone:</strong> {{self.phone}}<br>
                 <strong>Email:</strong> {{self.email}}<br>
-              </p>  
+              </p>
             </div>
           </div>
 
 
-          
+
           <div class="col-lg-2 col-md-6 footer-links">
             <div class="col-lg-12">
-                <div class="contact-map">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3983.911624691602!2d101.67257637594298!3d3.1180778968574323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1698868755819!5m2!1sen!2snp" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    {% comment %} <iframe id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d498.6004265859398!2d103.85051751176076!3d1.2923600990574362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a1350d10f1%3A0xe471fd72f9ffcba1!2sPeninsula%20Plaza%20Singapore!5e0!3m2!1sen!2snp!4v1604809094693!5m2!1sen!2snp" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> {% endcomment %}
-                </div>
+              <div class="contact-map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3983.911624691602!2d101.67257637594298!3d3.1180778968574323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1698868755819!5m2!1sen!2snp"
+                  style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                {% comment %} <iframe id="gmap_canvas"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d498.6004265859398!2d103.85051751176076!3d1.2923600990574362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a1350d10f1%3A0xe471fd72f9ffcba1!2sPeninsula%20Plaza%20Singapore!5e0!3m2!1sen!2snp!4v1604809094693!5m2!1sen!2snp"
+                  frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> {% endcomment %}
+              </div>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -419,11 +440,12 @@ Delete the line below if you're just getting started and want to remove the welc
       <div class="copyright">
         &copy; Copyright <strong><span>PLATINUM RENAISSANCE SDN BHD, MALAYSIA </span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>

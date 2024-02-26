@@ -17,7 +17,7 @@ def submit_contact_form(request):
 
         # Replace these with your actual email addresses
         sender_email = 'operations@platinum-my.com'
-        recipient_email = ['operations@platinum-my.com','developer@noticevalley.com']
+        recipient_email = ['operations@platinum-my.com']
 
         try:
             # send_mail(

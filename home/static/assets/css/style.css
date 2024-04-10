@@ -647,9 +647,7 @@ section {
 }
 .image_fixed_size {
   width: 100%; /* Set width to 100% to ensure responsiveness */
-  height: auto; /* Allow the height to adjust proportionally based on the width */
-  max-width: 400px; /* Set a maximum width for larger screens */
-  max-height: 300px; /* Set a maximum height for larger screens */
+  max-height: 280px; /* Set a maximum height for larger screens */
 }
 /*--------------------------------------------------------------
 # About

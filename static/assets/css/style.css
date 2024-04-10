@@ -270,6 +270,9 @@ h6 {
   visibility: visible;
 }
 
+.contact-icon{
+  margin-bottom: 1.25rem;
+}
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {
     left: -90%;
@@ -297,6 +300,7 @@ h6 {
 .mobile-nav-toggle.bi-x {
   color: #5c9f24;
 }
+
 
 @media (max-width: 991px) {
   
@@ -642,8 +646,9 @@ section {
   margin-bottom: 20px !important; 
 }
 .image_fixed_size {
-  width: 150; /* Set your desired width */
-  height: 150px; /* Set your desired height */
+   width: 100%; /* Set width to 100% to ensure responsiveness */
+ 
+  max-height: 279px; /* Set a maximum height for larger screens */
 }
 /*--------------------------------------------------------------
 # About
